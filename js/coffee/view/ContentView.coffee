@@ -9,11 +9,13 @@ class ContentView extends AppView
     	@header = @$el.find('.main-header')[0]
     	@render()
 
-    	@githubRepos = new GithubFeaturedReposView()
+    	@githubTrendingRepos = new GithubTrendingReposView()
+    	@githubFeaturedRepos = new GithubFeaturedReposView()
     	@hackerNewsTopStories = new HackerNewsTopStoriesView()
 
+    	@$el.append @githubTrendingRepos.$el
     	@$el.append @hackerNewsTopStories.$el
-    	@$el.append @githubRepos.$el
+    	@$el.append @githubFeaturedRepos.$el
 
     render: ->
 

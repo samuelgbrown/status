@@ -29,7 +29,7 @@ class HackerNewsTopStoriesView extends AppView
 			error: (res) ->
 
 				@hideLoadState()
-				@$el.html( _.template @template, {'success' : false} )
+				@$el.append( _.template @template, {'success' : false} )
 
 	animateStoriesIn: ->
 

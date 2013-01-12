@@ -19,13 +19,23 @@
         <![endif]-->
 
         <div class="main" style="display:none">
-            
+
             <header class="main-header">
                 <h1 style="margin-top: -75px">Status</h1>
             </header>
 
             <div class="" id="hacker-news-stories" style="display:none">
                 <h1>Top Stories</h1>
+                <div class="loading">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </div>
+            </div>
+
+            <div class="" id="github-featured" style="display:none">
+                <h1>Featured on Github</h1>
                 <div class="loading">
                     <div class="loading-dot"></div>
                     <div class="loading-dot"></div>
@@ -56,12 +66,12 @@
 
         <script src="js/main.js"></script>
 
-        <script id="github-featured-template" type="text/underscore-template">
-            <% if (success == false) %>
+        <script id="github-trending-template" type="text/underscore-template">
+            <% if (success == false) { %>
                 <div class='failed'>
                     <span>Loading failed :(</span> <a href='#'>Try again?</a>
                 </div>
-            <% else %>
+            <% } else { %>
             <ul>
                 <% _.each(data.repos, function(repo) { %>
 
@@ -71,6 +81,25 @@
 
                 <% }); %>
             </ul>
+            <% } %>
+        </script>
+
+        <script id="github-featured-template" type="text/underscore-template">
+            <% if (success == false) { %>
+                <div class='failed'>
+                    <span>Loading failed :(</span> <a href='#'>Try again?</a>
+                </div>
+            <% } else { %>
+            <ul>
+                <% _.each(data.repos, function(repo) { %>
+
+                    <li>
+                        <a href="<%= repo.url %>"><%= repo.title %></a>
+                    </li>
+
+                <% }); %>
+            </ul>
+            <% } %>
         </script>
 
         <script id="hacker-news-stories-template" type="text/underscore-template">
@@ -80,28 +109,32 @@
                 </div>
             <% } else { %>
 
+                <% var i = 0; %>
+
                 <ul>
                     <% _.each(data.stories, function(story) { %>
+                        <% if (i < 10)  { %>
 
-                        <li>
-                            <p style="opacity:0">
+                            <li>
+                                <p style="opacity:0">
 
-                            <span>
-                                <a href="<%= story.url %>"><%= story.title %></a>
-                            </span>
+                                <span>
+                                    <a href="<%= story.url %>"><%= story.title %></a>
+                                </span>
 
-                            <% if (story.sources.hacker_news) { %>
-                                <span class="icon hackernews"></span>
+                                <% if (story.sources.hacker_news) { %>
+                                    <span class="icon hackernews"></span>
+                                <% } %>
+                                <% if (story.sources.reddit) { %>
+                                    <span class="icon reddit"></span>
+                                <% } %>
+
+                                </p>
+                                
+                            </li>
+
                             <% } %>
-                            <% if (story.sources.reddit) { %>
-                                <span class="icon reddit"></span>
-                            <% } %>
-
-
-                            </p>
-                            
-                        </li>
-
+                        <% i++; %>
                     <% }); %>
                 </ul>
 

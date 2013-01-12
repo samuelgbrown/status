@@ -80,6 +80,10 @@ h1 {
     font-size: 65px;
 }
 
+.failed {
+    color: rgba(0,0,0,0.5);
+}
+
 #hacker-news-stories,
 #github-featured {
     float: left;
