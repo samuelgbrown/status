@@ -15,6 +15,7 @@ function getUrl($url)
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_USERAGENT, "@status bot v0.1");
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	curl_setopt($ch, CURLOPT_USERPWD, "NotBugger:IceCream77");
 	return curl_exec($ch);
 	curl_close($ch);
 	$ch = null;
@@ -51,8 +52,8 @@ foreach ($featured_repositories as $value) {
 foreach ($featured_repositories as $value) {
 
 	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(1)->nodeValue));
-	
-	$trending_repos[$repo]['title'] = $repo;
+
+	$featured_repos[$repo]['title'] = $repo;
 
 	$featured_repos[$repo]['author'] = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(0)->nodeValue));
 
@@ -62,8 +63,27 @@ foreach ($featured_repositories as $value) {
 
 	$featured_repos[$repo]['forks'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//li[@class="forks"]/a', $value)->item(0)->nodeValue));
 }
+$languages = array();
+
+foreach ($featured_repos as $key => $value) {
+
+	$languages[] = json_decode(getUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
+}
+foreach ($trending_repos as $key => $value) {
+
+	$languages[] = json_decode(getUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
+}
+
+print_r($languages);
+
+foreach ($languages as $key => $value) {
+	print $key;
+	print $value;
+}
 
 $output['featured_repos']=$featured_repos;
 $output['trending_repos']=$trending_repos;
 
-print_r(json_encode($output));
+//print_r(json_encode($output));
+
+//print_r($languages);
