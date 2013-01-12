@@ -18,10 +18,12 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div class="main">
-            <h1>Status</h1>
+        <div class="main" style="display:none">
+            <header class="main-header">
+                <h1>Status</h1>
+            </header>
 
-            <div class="" id="hacker-news-stories">
+            <div class="" id="hacker-news-stories" style="display:none">
                 <h1>Top Stories</h1>
                 <div class="loading">
                     <div class="loading-dot"></div>
@@ -31,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="" id="github-featured">
+            <div class="" id="github-featured" style="display:none">
                 <h1>Featured on Github</h1>
                 <div class="loading">
                     <div class="loading-dot"></div>
@@ -81,7 +83,7 @@
                     <% _.each(data.stories, function(story) { %>
 
                         <li>
-                            <p>
+                            <p style="opacity:0">
 
                             <span>
                                 <a href="<%= story.url %>"><%= story.title %></a>

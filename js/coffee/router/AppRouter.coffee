@@ -12,4 +12,4 @@ class AppRouter extends Backbone.Router
     # Default
 
     defaultRoute: ->
-        new AppView()
+        window.app.view = new AppView()

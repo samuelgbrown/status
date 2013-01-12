@@ -9,6 +9,8 @@ class GithubFeaturedReposView extends AppView
 
 	render: ->
 
+		@$el.fadeIn(750)
+
 		@template = $('#github-featured-template').html()
 
 		#async grab data

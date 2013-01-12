@@ -33,10 +33,15 @@
 
     ContentView.prototype.initialize = function() {
       console.log("content view init");
+      this.render();
       this.githubRepos = new GithubFeaturedReposView();
       this.hackerNewsTopStories = new HackerNewsTopStoriesView();
       this.$el.append(this.hackerNewsTopStories.$el);
       return this.$el.append(this.githubRepos.$el);
+    };
+
+    ContentView.prototype.render = function() {
+      return this.$el.fadeIn();
     };
 
     return ContentView;
@@ -59,6 +64,7 @@
     };
 
     GithubFeaturedReposView.prototype.render = function() {
+      this.$el.fadeIn(750);
       this.template = $('#github-featured-template').html();
       return this.populateGithubFeatured();
     };
@@ -111,6 +117,7 @@
 
     HackerNewsTopStoriesView.prototype.render = function() {
       var _this = this;
+      this.$el.fadeIn(750);
       this.template = $('#hacker-news-stories-template').html();
       return $.ajax({
         url: 'feeds/articles.php',
@@ -118,10 +125,11 @@
         data: null,
         success: function(res) {
           _this.hideLoadState();
-          return _this.$el.append(_.template(_this.template, {
+          _this.$el.append(_.template(_this.template, {
             'success': true,
             'data': res
           }));
+          return _this.animateStoriesIn();
         },
         error: function(res) {
           this.hideLoadState();
@@ -129,6 +137,34 @@
             'success': false
           }));
         }
+      });
+    };
+
+    HackerNewsTopStoriesView.prototype.animateStoriesIn = function() {
+      var stories, timeDelay;
+      stories = this.$el.find('li');
+      timeDelay = 0;
+      return _.each(stories, function(story) {
+        var p;
+        p = $(story).find('p')[0];
+        setTimeout(function() {
+          return $(p).animate({
+            opacity: 1
+          });
+        }, timeDelay);
+        return timeDelay = timeDelay + 65;
+      });
+    };
+
+    HackerNewsTopStoriesView.prototype.resetAnimation = function() {
+      var stories;
+      stories = this.$el.find('li');
+      return _.each(stories, function(story) {
+        var p;
+        p = $(story).find('p')[0];
+        return $(p).css({
+          opacity: 0
+        });
       });
     };
 
@@ -165,7 +201,7 @@
     };
 
     AppRouter.prototype.defaultRoute = function() {
-      return new AppView();
+      return window.app.view = new AppView();
     };
 
     return AppRouter;
