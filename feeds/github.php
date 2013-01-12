@@ -44,7 +44,7 @@ $featured_repositories = $xpath->query('//ul[@class="ranked-repositories"]/li');
 $trending_repos = array();
 $featured_repos = array();
 
-foreach ($featured_repositories as $value) {
+foreach ($trending_repositories as $value) {
 
 	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(1)->nodeValue));
 
@@ -63,7 +63,7 @@ foreach ($featured_repositories as $value) {
 
 foreach ($featured_repositories as $value) {
 
-	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(0)->nodeValue));
+	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(1)->nodeValue));
 
 	$featured_repos[$repo]['title'] = $repo;
 
