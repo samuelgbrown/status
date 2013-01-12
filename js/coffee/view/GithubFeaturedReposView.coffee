@@ -16,6 +16,7 @@ class GithubFeaturedReposView extends AppView
 	
 	populateGithubFeatured: ->
 
+		### Waiting for ben
 		$.ajax
 			url : 'http://feeds.feedburner.com/thechangelog?format=xml'
 			method: 'GET'
@@ -29,12 +30,13 @@ class GithubFeaturedReposView extends AppView
 			error: (res) ->
 
 				@$el.html( _.template @template, {'success' : false} )
+		###
 
 	hideLoadState: ->
 
-		@loadingEl.hide()
+		$(@loadingEl).hide()
 
 	showLoadState: ->
 
-		@loadingEl.show()
+		$(@loadingEl).show()
 

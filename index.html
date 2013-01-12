@@ -54,13 +54,36 @@
         <script src="js/main.js"></script>
 
         <script id="github-featured-template" type="text/underscore-template">
+            <% if (success == false) %>
+                <div class='failed'>
+                    <span>Loading failed :(</span> <a href='#'>Try again?</a>
+                </div>
+            <% else %>
             <ul>
+                <% _.each(data.repos, function(repo) { %>
+
+                    <li>
+                        <a href="<%= repo.url %>"><%= repo.title %></a>
+                    </li>
+
+                <% }); %>
             </ul>
         </script>
 
         <script id="hacker-news-stories-template" type="text/underscore-template">
+            <% if (success == false) %>
+                <div class='failed'>
+                    <span>Loading failed :(</span> <a href='#'>Try again?</a>
+                </div>
+            <% else %>
             <ul>
-                <% %>
+                <% _.each(data.stories, function(story) { %>
+
+                    <li>
+                        <a href="<%= story.url %>"><%= story.title %></a>
+                    </li>
+
+                <% }); %>
             </ul>
         </script>
 
