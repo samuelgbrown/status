@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/samgbrown/REPOS/hackathon"
+		}
+	],
+
+	"build_systems" : [
+		{
+			"name": "StatusBuild",
+			"cmd": ["${project_path}/build.sh"],
+			"working_dir": "${project_path}"
+		}
+	]
+
+}

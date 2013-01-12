@@ -57,10 +57,14 @@ textarea {
 
 
 /* ==========================================================================
-   Author's custom styles
+   Author's custom styles: samuelgbrown & bencollins
    ========================================================================== */
 
-
+body {
+    width: 960px;
+    margin: 0 auto;
+    font-family: 'Open Sans', sans-serif;
+}
 
 
 
