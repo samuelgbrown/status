@@ -1,5 +1,5 @@
 <?php
- error_reporting(E_ALL);//E_WARNINGS);
+ error_reporting(E_WARNINGS);
  ini_set("display_errors", 1);
 
 header('Content-type: application/json');
@@ -30,18 +30,15 @@ $ranked_repositories = $xpath->query('//ul[@class="ranked-repositories"]');
 
 foreach ($trending_repositories as $value) {
 
-	$repo = $xpath->query('.//h3/a/[1]', $value)->item(0)->nodeValue;
+	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(1)->nodeValue));
 
-	print_r($repo);	
+	$trending_repos[$repo]['author'] = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(0)->nodeValue));
 
-/*
-	$trending_repos[$repo]['author'] = $xpath->query('.//h3/a/1', $value)->item(0)->nodeValue;
+	$trending_repos[$repo]['description '] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//p[@class="description"]', $value)->item(0)->nodeValue));
 
-	$trending_repos[$repo]['description '] = $xpath->query('.//p[@class="description"]', $value)->item(0)->nodeValue;
+	$trending_repos[$repo]['watchers'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//li[@class="watchers"]/a', $value)->item(0)->nodeValue));
 
-	$trending_repos[$repo]['watchers'] = $xpath->query('.//li[@class="watchers"]/a', $value)->item(0)->nodeValue;
-
-	$trending_repos[$repo]['forks'] = $xpath->query('.//li[@class="forks"]/a', $value)->item(0)->nodeValue;*/
+	$trending_repos[$repo]['forks'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//li[@class="forks"]/a', $value)->item(0)->nodeValue));
 
 }
 
@@ -49,4 +46,6 @@ foreach ($ranked_repositories as $value) {
 	//print($value->nodeValue);
 }
 
-print_r($trending_repos);
+$output['trending_repos']=$trending_repos;
+
+print_r(json_encode($output));
