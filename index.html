@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js">
     <head>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -20,6 +20,8 @@
 
         <div class="main">
             <h1>Status</h1>
+            <div id="hacker-news-stories"></div>
+            <div id="github-featured"></div>
         </div>
 
 
@@ -32,9 +34,16 @@
 
         <script src="js/main.js"></script>
 
-        <script id="me-summary-template" type="text/underscore-template">
+        <script id="github-featured-template" type="text/underscore-template">
             <h1>Featured on Github</h1>
-            <ul id="github-featured-repos">
+            <ul>
+            </ul>
+        </script>
+
+        <script id="hacker-news-stories-template" type="text/underscore-template">
+            <h1>Top Stories on HackerNews</h1>
+            <ul>
+                <% %>
             </ul>
         </script>
 

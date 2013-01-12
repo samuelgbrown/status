@@ -1,11 +1,12 @@
 class GithubFeaturedReposView extends AppView
 
+	el: $('#github-featured')
+
 	initialize: ->
 
-		@el = new Backbone.View().setElement $('<div/>')
 		@render()
 
 	render: ->
 
-		@template = $('#me-summary-template').html()
+		@template = $('#github-featured-template').html()
 		@$el.html(_.template @template)
