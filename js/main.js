@@ -54,12 +54,40 @@
     GithubFeaturedReposView.prototype.el = $('#github-featured');
 
     GithubFeaturedReposView.prototype.initialize = function() {
+      this.loadingEl = this.$el.find('.loading')[0];
       return this.render();
     };
 
     GithubFeaturedReposView.prototype.render = function() {
       this.template = $('#github-featured-template').html();
-      return this.$el.html(_.template(this.template));
+      return this.populateGithubFeatured();
+    };
+
+    GithubFeaturedReposView.prototype.populateGithubFeatured = function() {
+      /* Waiting for ben
+      		$.ajax
+      			url : 'http://feeds.feedburner.com/thechangelog?format=xml'
+      			method: 'GET'
+      			data: null
+      			success: (res) ->
+      
+      				#extract data from res
+      				console.log res
+      				#@$el.html(_.template @template, {'success' : true, 'data' : res})
+      
+      			error: (res) ->
+      
+      				@$el.html( _.template @template, {'success' : false} )
+      */
+
+    };
+
+    GithubFeaturedReposView.prototype.hideLoadState = function() {
+      return $(this.loadingEl).hide();
+    };
+
+    GithubFeaturedReposView.prototype.showLoadState = function() {
+      return $(this.loadingEl).show();
     };
 
     return GithubFeaturedReposView;
@@ -77,12 +105,40 @@
     HackerNewsTopStoriesView.prototype.el = $('#hacker-news-stories');
 
     HackerNewsTopStoriesView.prototype.initialize = function() {
+      this.loadingEl = this.$el.find('.loading')[0];
       return this.render();
     };
 
     HackerNewsTopStoriesView.prototype.render = function() {
+      var dummyData;
       this.template = $('#hacker-news-stories-template').html();
-      return this.$el.html(_.template(this.template));
+      dummyData = {
+        'stories': [
+          {
+            'url': 'http://www.google.com/',
+            'title': 'Man commits ludircrous act.'
+          }, {
+            'url': 'http://www.google.com/',
+            'title': 'Man foolishly speculates on issue, causes flame war.'
+          }, {
+            'url': 'http://www.google.com/',
+            'title': 'Woman writes some code, men accross the world stunned.'
+          }
+        ]
+      };
+      this.hideLoadState();
+      return this.$el.append(_.template(this.template, {
+        'success': true,
+        'data': dummyData
+      }));
+    };
+
+    HackerNewsTopStoriesView.prototype.hideLoadState = function() {
+      return $(this.loadingEl).hide();
+    };
+
+    HackerNewsTopStoriesView.prototype.showLoadState = function() {
+      return $(this.loadingEl).show();
     };
 
     return HackerNewsTopStoriesView;
