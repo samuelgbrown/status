@@ -110,27 +110,26 @@
     };
 
     HackerNewsTopStoriesView.prototype.render = function() {
-      var dummyData;
+      var _this = this;
       this.template = $('#hacker-news-stories-template').html();
-      dummyData = {
-        'stories': [
-          {
-            'url': 'http://www.google.com/',
-            'title': 'Man commits ludircrous act.'
-          }, {
-            'url': 'http://www.google.com/',
-            'title': 'Man foolishly speculates on issue, causes flame war.'
-          }, {
-            'url': 'http://www.google.com/',
-            'title': 'Woman writes some code, men accross the world stunned.'
-          }
-        ]
-      };
-      this.hideLoadState();
-      return this.$el.append(_.template(this.template, {
-        'success': true,
-        'data': dummyData
-      }));
+      return $.ajax({
+        url: 'feeds/articles.php',
+        method: 'GET',
+        data: null,
+        success: function(res) {
+          _this.hideLoadState();
+          return _this.$el.append(_.template(_this.template, {
+            'success': true,
+            'data': res
+          }));
+        },
+        error: function(res) {
+          this.hideLoadState();
+          return this.$el.html(_.template(this.template, {
+            'success': false
+          }));
+        }
+      });
     };
 
     HackerNewsTopStoriesView.prototype.hideLoadState = function() {

@@ -13,26 +13,20 @@ class HackerNewsTopStoriesView extends AppView
 
 		#async get aggregated stories from backend (ben)
 		#then chuck stuff back in da templatez
-		#@$el.append(_.template @template)
+		
+		$.ajax
+			url : 'feeds/articles.php'
+			method: 'GET'
+			data: null
+			success: (res) =>
 
-		dummyData =
-			'stories' : [
-				{
-					'url' : 'http://www.google.com/'
-					'title' : 'Man commits ludircrous act.'
-				},
-				{
-					'url' : 'http://www.google.com/'
-					'title' : 'Man foolishly speculates on issue, causes flame war.'
-				},
-				{
-					'url' : 'http://www.google.com/'
-					'title' : 'Woman writes some code, men accross the world stunned.'
-				}
-			]
+				@hideLoadState()
+				@$el.append( _.template @template, {'success' : true, 'data' : res} )
 
-		@hideLoadState()
-		@$el.append(_.template @template, {'success' : true, 'data' : dummyData})
+			error: (res) ->
+
+				@hideLoadState()
+				@$el.html( _.template @template, {'success' : false} )
 
 	hideLoadState: ->
 

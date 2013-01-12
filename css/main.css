@@ -82,9 +82,45 @@ h1 {
     padding: 15px 15px 15px 0;
 }
 
+#hacker-news-stories ul {
+    list-style-type: decimal-leading-zero;
+    padding-left: 36px;
+    font-size: 18px;
+}
+
+#hacker-news-stories ul li {
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+#hacker-news-stories ul li a {
+    color: black;
+    text-decoration: none;
+    font-weight: 400;
+    padding-right: 3px;
+}
+
+
 #github-featured {
     padding: 15px 0 15px 15px;
 }
+
+.icons-container {
+    display: inline;
+}
+
+
+.icon { width: 16px; height: 16px; display: inline-block; margin-bottom: -2px;}
+.icon.github {
+    background: url('/img/github.png') top left no-repeat;
+}
+.icon.hackernews {
+    background: url('/img/hackernews.png') top left no-repeat;
+}
+.icon.reddit {
+    background: url('/img/reddit.png') top left no-repeat;
+}
+
 
 .box{
   min-height: 20px;

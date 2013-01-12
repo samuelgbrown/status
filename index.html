@@ -22,7 +22,7 @@
             <h1>Status</h1>
 
             <div class="" id="hacker-news-stories">
-                <h1>Top Stories on HackerNews</h1>
+                <h1>Top Stories</h1>
                 <div class="loading">
                     <div class="loading-dot"></div>
                     <div class="loading-dot"></div>
@@ -71,20 +71,38 @@
         </script>
 
         <script id="hacker-news-stories-template" type="text/underscore-template">
-            <% if (success == false) %>
+            <% if (success == false) { %>
                 <div class='failed'>
                     <span>Loading failed :(</span> <a href='#'>Try again?</a>
                 </div>
-            <% else %>
-            <ul>
-                <% _.each(data.stories, function(story) { %>
+            <% } else { %>
 
-                    <li>
-                        <a href="<%= story.url %>"><%= story.title %></a>
-                    </li>
+                <ul>
+                    <% _.each(data.stories, function(story) { %>
 
-                <% }); %>
-            </ul>
+                        <li>
+                            <p>
+
+                            <span>
+                                <a href="<%= story.url %>"><%= story.title %></a>
+                            </span>
+
+                            <% if (story.sources.hacker_news) { %>
+                                <span class="icon hackernews"></span>
+                            <% } %>
+                            <% if (story.sources.reddit) { %>
+                                <span class="icon reddit"></span>
+                            <% } %>
+
+
+                            </p>
+                            
+                        </li>
+
+                    <% }); %>
+                </ul>
+
+            <% } %>
         </script>
 
     </body>
