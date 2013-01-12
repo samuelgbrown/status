@@ -30,9 +30,9 @@ $ranked_repositories = $xpath->query('//ul[@class="ranked-repositories"]');
 
 foreach ($trending_repositories as $value) {
 
-	$repo = $xpath->query('.//h3/a/2', $value)->item(0)->nodeValue;
+	$repo = $xpath->query('.//h3/a/[1]', $value)->item(0)->nodeValue;
 
-	print_r($repo);
+	print_r($repo);	
 
 /*
 	$trending_repos[$repo]['author'] = $xpath->query('.//h3/a/1', $value)->item(0)->nodeValue;

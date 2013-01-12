@@ -61,7 +61,7 @@ foreach ($hn_articles->items as $article) {
 foreach ($reddit_programming->data->children as $article) {
 	if(!$articles[md5($article->data->url)]){
 		$articles[md5($article->data->url)]['title'] = $article->data->title;	
-		$articles[md5($article->data->url)]['link'] = $article->data->url;
+		$articles[md5($article->data->url)]['url'] = $article->data->url;
 	}
 	$articles[md5($article->data->url)]['sources']["reddit"]['title'] = $article->data->title;	
 	$articles[md5($article->data->url)]['sources']["reddit"]['up_votes'] = $article->data->ups;
@@ -73,7 +73,7 @@ foreach ($reddit_programming->data->children as $article) {
 foreach ($reddit_netsec->data->children as $article) {
 	if(!$articles[md5($article->data->url)]){
 		$articles[md5($article->data->url)]['title'] = $article->data->title;	
-		$articles[md5($article->data->url)]['link'] = $article->data->url;
+		$articles[md5($article->data->url)]['url'] = $article->data->url;
 	}
 	$articles[md5($article->data->url)]['sources']["reddit"]['title'] = $article->data->title;	
 	$articles[md5($article->data->url)]['sources']["reddit"]['up_votes'] = $article->data->ups;
@@ -85,7 +85,7 @@ foreach ($reddit_netsec->data->children as $article) {
 foreach ($reddit_android->data->children as $article) {
 	if(!$articles[md5($article->data->url)]){
 		$articles[md5($article->data->url)]['title'] = $article->data->title;	
-		$articles[md5($article->data->url)]['link'] = $article->data->url;
+		$articles[md5($article->data->url)]['url'] = $article->data->url;
 	}
 	$articles[md5($article->data->url)]['sources']["reddit"]['title'] = $article->data->title;	
 	$articles[md5($article->data->url)]['sources']["reddit"]['up_votes'] = $article->data->ups;
@@ -97,7 +97,7 @@ foreach ($reddit_android->data->children as $article) {
 foreach ($reddit_javascript->data->children as $article) {
 	if(!$articles[md5($article->data->url)]){
 		$articles[md5($article->data->url)]['title'] = $article->data->title;	
-		$articles[md5($article->data->url)]['link'] = $article->data->url;
+		$articles[md5($article->data->url)]['url'] = $article->data->url;
 	}
 	$articles[md5($article->data->url)]['sources']["reddit"]['title'] = $article->data->title;	
 	$articles[md5($article->data->url)]['sources']["reddit"]['up_votes'] = $article->data->ups;
