@@ -41,7 +41,7 @@ foreach ($hn_articles->items as $article) {
 }
 
 foreach ($reddit_programming->data->children as $article) {
-	if($articles[md5($article->data->url)]){
+	if(!$articles[md5($article->data->url)]){
 		$articles[md5($article->data->url)]['title'] = $article->data->title;	
 		$articles[md5($article->data->url)]['link'] = $article->data->url;
 	}
