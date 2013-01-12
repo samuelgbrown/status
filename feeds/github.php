@@ -15,12 +15,24 @@ function getUrl($url)
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_USERAGENT, "@status bot v0.1");
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	return curl_exec($ch);
+	curl_close($ch);
+	$ch = null;
+}
+function getAuthUrl($url)
+{
+
+    $ch = curl_init(); 
+
+	curl_setopt($ch, CURLOPT_URL, $url); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_USERAGENT, "@status bot v0.1");
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 	curl_setopt($ch, CURLOPT_USERPWD, "NotBugger:IceCream77");
 	return curl_exec($ch);
 	curl_close($ch);
 	$ch = null;
 }
-
 $doc->loadHTML(getUrl('https://github.com/explore'));
 
 $xpath = new DOMXpath($doc);
@@ -67,23 +79,23 @@ $languages = array();
 
 foreach ($featured_repos as $key => $value) {
 
-	$languages[] = json_decode(getUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
+	$languages[] = json_decode(getAuthUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
 }
 foreach ($trending_repos as $key => $value) {
 
-	$languages[] = json_decode(getUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
+	$languages[] = json_decode(getAuthUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
 }
 
-print_r($languages);
+//print_r($languages);
 
 foreach ($languages as $key => $value) {
-	print $key;
-	print $value;
+	//print $key;
+	//print $value;
 }
 
 $output['featured_repos']=$featured_repos;
 $output['trending_repos']=$trending_repos;
 
-//print_r(json_encode($output));
+print_r(json_encode($output));
 
 //print_r($languages);
