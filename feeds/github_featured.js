@@ -1,3 +1,4 @@
+var fs = require('fs');
 var http = require('http'),
 	feedparser = require('feedparser'),
 	url = 'http://feeds.feedburner.com/thechangelog',
@@ -9,6 +10,14 @@ feedparser.parseUrl(url)
   .on('article', function(article){
 	articles.push(article);
   });
+
+fs.writeFile("github.json", JSON.stringify(articles), function(err) {
+    if(err) {
+        console.log(err);
+    } else {
+        console.log("The file was saved!");
+    }
+});
 
 
 http.createServer( function(req, res) {
