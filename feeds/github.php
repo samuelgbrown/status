@@ -39,7 +39,7 @@ foreach ($featured_repositories as $value) {
 
 	$trending_repos[$repo]['author'] = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(0)->nodeValue));
 
-	$trending_repos[$repo]['description '] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//p[@class="description"]', $value)->item(0)->nodeValue));
+	$trending_repos[$repo]['description'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//p[@class="description"]', $value)->item(0)->nodeValue));
 
 	$trending_repos[$repo]['watchers'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//li[@class="watchers"]/a', $value)->item(0)->nodeValue));
 
@@ -54,7 +54,7 @@ foreach ($featured_repositories as $value) {
 
 	$featured_repos[$repo]['author'] = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(0)->nodeValue));
 
-	$featured_repos[$repo]['description '] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//p[@class="description"]', $value)->item(0)->nodeValue));
+	$featured_repos[$repo]['description'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//p[@class="description"]', $value)->item(0)->nodeValue));
 
 	$featured_repos[$repo]['watchers'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//li[@class="watchers"]/a', $value)->item(0)->nodeValue));
 
