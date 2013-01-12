@@ -21,14 +21,12 @@ function getUrl($url)
 $hn_articles = json_decode(getUrl('http://api.ihackernews.com/page?format=json'));
 
 $reddit_programming = json_decode(getUrl('http://www.reddit.com/r/programming.json'));
-/*
+
 $reddit_android = json_decode(getUrl('http://www.reddit.com/r/android.json'));
 
 $reddit_netsec = json_decode(getUrl('http://www.reddit.com/r/netsec.json'));
 
-$reddit_javascript = json_decode(getUrl('http://www.reddit.com/r/javascript.json'));*/
-
-//print_r($reddit_programming->data->children);
+$reddit_javascript = json_decode(getUrl('http://www.reddit.com/r/javascript.json'));
 
 $articles = null;
 
@@ -50,4 +48,34 @@ foreach ($reddit_programming->data->children as $article) {
 
 }
 
-print_r(json_encode($articles));
+foreach ($reddit_netsec->data->children as $article) {
+	if(!$articles[md5($article->data->url)]){
+		$articles[md5($article->data->url)]['title'] = $article->data->title;	
+		$articles[md5($article->data->url)]['link'] = $article->data->url;
+	}
+	$articles[md5($article->data->url)]['sources']["reddit_programming"]['title'] = $article->data->title;	
+	$articles[md5($article->data->url)]['sources']["reddit_programming"]['up_votes'] = $article->data->ups;
+
+}
+
+foreach ($reddit_android->data->children as $article) {
+	if(!$articles[md5($article->data->url)]){
+		$articles[md5($article->data->url)]['title'] = $article->data->title;	
+		$articles[md5($article->data->url)]['link'] = $article->data->url;
+	}
+	$articles[md5($article->data->url)]['sources']["reddit_programming"]['title'] = $article->data->title;	
+	$articles[md5($article->data->url)]['sources']["reddit_programming"]['up_votes'] = $article->data->ups;
+
+}
+
+foreach ($reddit_javascript->data->children as $article) {
+	if(!$articles[md5($article->data->url)]){
+		$articles[md5($article->data->url)]['title'] = $article->data->title;	
+		$articles[md5($article->data->url)]['link'] = $article->data->url;
+	}
+	$articles[md5($article->data->url)]['sources']["reddit_programming"]['title'] = $article->data->title;	
+	$articles[md5($article->data->url)]['sources']["reddit_programming"]['up_votes'] = $article->data->ups;
+
+}
+$stories['stories']=$articles;
+print_r(json_encode($stories));
