@@ -63,7 +63,7 @@ foreach ($featured_repositories as $value) {
 
 foreach ($featured_repositories as $value) {
 
-	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(1)->nodeValue));
+	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(0)->nodeValue));
 
 	$featured_repos[$repo]['title'] = $repo;
 
@@ -88,14 +88,11 @@ foreach ($trending_repos as $key => $value) {
 
 //print_r($languages);
 
-foreach ($languages as $key => $value) {
-	//print $key;
-	//print $value;
+foreach ($languages as $value) {
+	//print_r($value);
 }
 
 $output['featured_repos']=$featured_repos;
 $output['trending_repos']=$trending_repos;
 
 print_r(json_encode($output));
-
-//print_r($languages);
