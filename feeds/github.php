@@ -103,7 +103,11 @@ foreach ($languages as $key => $value) {
 
 foreach ($languages_data as $key => $value) {
 	$languages_output[$key] = (($value / $total) * 100);
+	
+	$languages_output[$key] = (($value / $total) * 100);
 }
+
+arsort($languages_output);
 
 $output['featured_repos']=$featured_repos;
 $output['trending_repos']=$trending_repos;
