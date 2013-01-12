@@ -13,7 +13,6 @@
     }
 
     AppView.prototype.initialize = function() {
-      console.log('appview init');
       return this.child = new ContentView();
     };
 
@@ -32,14 +31,13 @@
     ContentView.prototype.el = $('.main');
 
     ContentView.prototype.initialize = function() {
-      console.log("content view init");
       this.header = this.$el.find('.main-header')[0];
       this.render();
+      this.hackerNewsTopStories = new HackerNewsTopStoriesView();
       this.githubTrendingRepos = new GithubTrendingReposView();
       this.githubFeaturedRepos = new GithubFeaturedReposView();
-      this.hackerNewsTopStories = new HackerNewsTopStoriesView();
-      this.$el.append(this.githubTrendingRepos.$el);
       this.$el.append(this.hackerNewsTopStories.$el);
+      this.$el.append(this.githubTrendingRepos.$el);
       return this.$el.append(this.githubFeaturedRepos.$el);
     };
 
@@ -146,10 +144,10 @@
     GithubTrendingReposView.prototype.render = function() {
       this.$el.fadeIn(750);
       this.template = $('#github-trending-template').html();
-      return this.populateGithubFeatured();
+      return this.populateGithubTrending();
     };
 
-    GithubTrendingReposView.prototype.populateGithubFeatured = function() {
+    GithubTrendingReposView.prototype.populateGithubTrending = function() {
       var _this = this;
       return $.ajax({
         url: 'feeds/github.php',

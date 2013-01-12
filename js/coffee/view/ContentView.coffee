@@ -4,17 +4,16 @@ class ContentView extends AppView
 
     initialize: ->
 
-    	console.log "content view init"
-
     	@header = @$el.find('.main-header')[0]
     	@render()
 
+    	@hackerNewsTopStories = new HackerNewsTopStoriesView()
     	@githubTrendingRepos = new GithubTrendingReposView()
     	@githubFeaturedRepos = new GithubFeaturedReposView()
-    	@hackerNewsTopStories = new HackerNewsTopStoriesView()
+    	
 
-    	@$el.append @githubTrendingRepos.$el
     	@$el.append @hackerNewsTopStories.$el
+    	@$el.append @githubTrendingRepos.$el
     	@$el.append @githubFeaturedRepos.$el
 
     render: ->

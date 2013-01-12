@@ -61,7 +61,7 @@ textarea {
    ========================================================================== */
 
 body {
-    width: 960px;
+    width: 90%;
     margin: 0 auto;
     font-family: 'Open Sans', sans-serif;
 }
@@ -84,15 +84,40 @@ h1 {
     color: rgba(0,0,0,0.5);
 }
 
-#hacker-news-stories,
-#github-featured {
+#hacker-news-stories {
     float: left;
-    width: 50%;
+    width: 45%;
     box-sizing: border-box;
 }
 
+#github-featured,
+#github-trending {
+    float: left;
+    width: 27.5%;
+    box-sizing: border-box;
+    padding: 0 15px;
+}
+
+#github-trending ul, #github-featured ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#github-trending a, #github-featured a {
+    color: #5FA4E8;
+}
+
+#github-trending p, #github-featured p {
+    margin: 0;
+}
+
+#github-featured ul li, #github-trending ul li {
+    margin-bottom: 15px;
+}
+
 #hacker-news-stories {
-    padding: 15px 15px 15px 0;
+    padding: 0 15px;
 }
 
 #hacker-news-stories ul {
@@ -113,10 +138,6 @@ h1 {
     padding-right: 3px;
 }
 
-
-#github-featured {
-    padding: 15px 0 15px 15px;
-}
 
 .icons-container {
     display: inline;

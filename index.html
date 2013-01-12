@@ -24,7 +24,7 @@
                 <h1 style="margin-top: -75px">Status</h1>
             </header>
 
-            <div class="" id="hacker-news-stories" style="display:none">
+            <div id="hacker-news-stories" style="display:none">
                 <h1>Top Stories</h1>
                 <div class="loading">
                     <div class="loading-dot"></div>
@@ -34,8 +34,8 @@
                 </div>
             </div>
 
-            <div class="" id="github-featured" style="display:none">
-                <h1>Featured on Github</h1>
+            <div id="github-trending" style="display:none">
+                <h1>Trending on Github</h1>
                 <div class="loading">
                     <div class="loading-dot"></div>
                     <div class="loading-dot"></div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="" id="github-featured" style="display:none">
+            <div id="github-featured" style="display:none">
                 <h1>Featured on Github</h1>
                 <div class="loading">
                     <div class="loading-dot"></div>
@@ -73,10 +73,16 @@
                 </div>
             <% } else { %>
             <ul>
-                <% _.each(data.repos, function(repo) { %>
+                <% _.each(data, function(repo) { %>
 
                     <li>
-                        <a href="<%= repo.url %>"><%= repo.title %></a>
+                        <p style="opacity:0">
+                            <a href="http://github.com/<%= repo.author %>/<%= repo.title %>"><%= repo.title %></a> from 
+                            <a href="http://github.com/<%= repo.author %>"><%= repo.author %></a>
+                            <p><%= repo.description %></p>
+                            <span><%= repo.watchers %> stars</span>
+                            <span><%= repo.forks %> forks</span>
+                        </p>
                     </li>
 
                 <% }); %>
@@ -91,10 +97,16 @@
                 </div>
             <% } else { %>
             <ul>
-                <% _.each(data.repos, function(repo) { %>
+                <% _.each(data, function(repo) { %>
 
                     <li>
-                        <a href="<%= repo.url %>"><%= repo.title %></a>
+                        <p style="opacity:0">
+                            <a href="http://github.com/<%= repo.author %>/<%= repo.title %>"><%= repo.title %></a> from 
+                            <a href="http://github.com/<%= repo.author %>"><%= repo.author %></a>
+                            <p><%= repo.description %></p>
+                            <span><%= repo.watchers %> stars</span>
+                            <span><%= repo.forks %> forks</span>
+                        </p>
                     </li>
 
                 <% }); %>
@@ -113,7 +125,7 @@
 
                 <ul>
                     <% _.each(data.stories, function(story) { %>
-                        <% if (i < 10)  { %>
+                        <% if (i < 15)  { %>
 
                             <li>
                                 <p style="opacity:0">
