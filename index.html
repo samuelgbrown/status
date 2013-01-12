@@ -20,8 +20,27 @@
 
         <div class="main">
             <h1>Status</h1>
-            <div class="box" id="hacker-news-stories"></div>
-            <div class="box"  id="github-featured"></div>
+
+            <div class="" id="hacker-news-stories">
+                <h1>Top Stories on HackerNews</h1>
+                <div class="loading">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </div>
+            </div>
+
+            <div class="" id="github-featured">
+                <h1>Featured on Github</h1>
+                <div class="loading">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </div>
+            </div>
+
         </div>
 
 
@@ -35,13 +54,11 @@
         <script src="js/main.js"></script>
 
         <script id="github-featured-template" type="text/underscore-template">
-            <h1>Featured on Github</h1>
             <ul>
             </ul>
         </script>
 
         <script id="hacker-news-stories-template" type="text/underscore-template">
-            <h1>Top Stories on HackerNews</h1>
             <ul>
                 <% %>
             </ul>

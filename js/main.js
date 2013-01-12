@@ -54,12 +54,37 @@
     GithubFeaturedReposView.prototype.el = $('#github-featured');
 
     GithubFeaturedReposView.prototype.initialize = function() {
+      this.loadingEl = this.$el.find('.loading')[0];
       return this.render();
     };
 
     GithubFeaturedReposView.prototype.render = function() {
       this.template = $('#github-featured-template').html();
-      return this.$el.html(_.template(this.template));
+      return this.populateGithubFeatured();
+    };
+
+    GithubFeaturedReposView.prototype.populateGithubFeatured = function() {
+      return $.ajax({
+        url: 'http://feeds.feedburner.com/thechangelog?format=xml',
+        method: 'GET',
+        data: null,
+        success: function(res) {
+          return console.log(res);
+        },
+        error: function(res) {
+          return this.$el.html(_.template(this.template, {
+            'success': false
+          }));
+        }
+      });
+    };
+
+    GithubFeaturedReposView.prototype.hideLoadState = function() {
+      return this.loadingEl.hide();
+    };
+
+    GithubFeaturedReposView.prototype.showLoadState = function() {
+      return this.loadingEl.show();
     };
 
     return GithubFeaturedReposView;
@@ -77,12 +102,21 @@
     HackerNewsTopStoriesView.prototype.el = $('#hacker-news-stories');
 
     HackerNewsTopStoriesView.prototype.initialize = function() {
+      this.loadingEl = this.$el.find('.loading')[0];
       return this.render();
     };
 
     HackerNewsTopStoriesView.prototype.render = function() {
       this.template = $('#hacker-news-stories-template').html();
-      return this.$el.html(_.template(this.template));
+      return this.$el.append(_.template(this.template));
+    };
+
+    HackerNewsTopStoriesView.prototype.hideLoadState = function() {
+      return this.loadingEl.hide();
+    };
+
+    HackerNewsTopStoriesView.prototype.showLoadState = function() {
+      return this.loadingEl.show();
     };
 
     return HackerNewsTopStoriesView;

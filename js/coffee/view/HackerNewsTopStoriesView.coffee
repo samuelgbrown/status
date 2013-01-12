@@ -4,9 +4,21 @@ class HackerNewsTopStoriesView extends AppView
 
 	initialize: ->
 
+		@loadingEl = @$el.find('.loading')[0]
 		@render()
 
 	render: ->
 
 		@template = $('#hacker-news-stories-template').html()
-		@$el.html(_.template @template)
+
+		#async get aggregated stories from backend (ben)
+		#then chuck stuff back in da templatez
+		@$el.append(_.template @template)
+
+	hideLoadState: ->
+
+		@loadingEl.hide()
+
+	showLoadState: ->
+
+		@loadingEl.show()
