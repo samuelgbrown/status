@@ -12,26 +12,19 @@ class GithubFeaturedReposView extends AppView
 		@$el.fadeIn(750)
 
 		@template = $('#github-featured-template').html()
-
-		#async grab data
-		@populateGithubFeatured()
 	
-	populateGithubFeatured: ->
+	populateRepos: (success_state, res) ->
 
-		$.ajax
-			url : 'feeds/github.php'
-			method: 'GET'
-			data: null
-			success: (res) =>
+		console.log success_state, res
 
-				@hideLoadState()
-				@$el.append( _.template @template, {'success' : true, 'data' : res.featured_repos} )
-				@animateStoriesIn()
-
-			error: (res) =>
-
-				@hideLoadState()
-				@$el.append( _.template @template, {'success' : false} )
+		if success_state == true
+			@hideLoadState()
+			@$el.append( _.template @template, {'success' : true, 'data' : res.featured_repos} )
+			@animateStoriesIn()
+		else
+			@hideLoadState()
+			@$el.append( _.template @template, {'success' : false} )
+				
 
 
 	animateStoriesIn: ->

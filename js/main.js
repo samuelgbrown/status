@@ -2,7 +2,8 @@
 (function() {
   var AppRouter, AppView, ContentView, GithubFeaturedReposView, GithubTrendingReposView, HackerNewsTopStoriesView,
     __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   AppView = (function(_super) {
 
@@ -25,6 +26,7 @@
     __extends(ContentView, _super);
 
     function ContentView() {
+      this.getGithubData = __bind(this.getGithubData, this);
       return ContentView.__super__.constructor.apply(this, arguments);
     }
 
@@ -38,7 +40,8 @@
       this.githubFeaturedRepos = new GithubFeaturedReposView();
       this.$el.append(this.hackerNewsTopStories.$el);
       this.$el.append(this.githubTrendingRepos.$el);
-      return this.$el.append(this.githubFeaturedRepos.$el);
+      this.$el.append(this.githubFeaturedRepos.$el);
+      return this.getGithubData();
     };
 
     ContentView.prototype.render = function() {
@@ -47,6 +50,23 @@
       h1 = $(this.header).find('h1')[0];
       return $(h1).animate({
         'margin-top': '0'
+      });
+    };
+
+    ContentView.prototype.getGithubData = function() {
+      var _this = this;
+      return this.test = $.ajax({
+        url: 'feeds/github.php',
+        method: 'GET',
+        data: null,
+        success: function(res) {
+          _this.githubTrendingRepos.populateRepos(true, res);
+          return _this.githubFeaturedRepos.populateRepos(true, res);
+        },
+        error: function(res) {
+          _this.githubTrendingRepos.populateRepos(false, res);
+          return _this.githubFeaturedRepos.populateRepos(false, res);
+        }
       });
     };
 
@@ -71,31 +91,24 @@
 
     GithubFeaturedReposView.prototype.render = function() {
       this.$el.fadeIn(750);
-      this.template = $('#github-featured-template').html();
-      return this.populateGithubFeatured();
+      return this.template = $('#github-featured-template').html();
     };
 
-    GithubFeaturedReposView.prototype.populateGithubFeatured = function() {
-      var _this = this;
-      return $.ajax({
-        url: 'feeds/github.php',
-        method: 'GET',
-        data: null,
-        success: function(res) {
-          _this.hideLoadState();
-          _this.$el.append(_.template(_this.template, {
-            'success': true,
-            'data': res.featured_repos
-          }));
-          return _this.animateStoriesIn();
-        },
-        error: function(res) {
-          _this.hideLoadState();
-          return _this.$el.append(_.template(_this.template, {
-            'success': false
-          }));
-        }
-      });
+    GithubFeaturedReposView.prototype.populateRepos = function(success_state, res) {
+      console.log(success_state, res);
+      if (success_state === true) {
+        this.hideLoadState();
+        this.$el.append(_.template(this.template, {
+          'success': true,
+          'data': res.featured_repos
+        }));
+        return this.animateStoriesIn();
+      } else {
+        this.hideLoadState();
+        return this.$el.append(_.template(this.template, {
+          'success': false
+        }));
+      }
     };
 
     GithubFeaturedReposView.prototype.animateStoriesIn = function() {
@@ -143,31 +156,41 @@
 
     GithubTrendingReposView.prototype.render = function() {
       this.$el.fadeIn(750);
-      this.template = $('#github-trending-template').html();
-      return this.populateGithubTrending();
+      return this.template = $('#github-trending-template').html();
     };
 
-    GithubTrendingReposView.prototype.populateGithubTrending = function() {
-      var _this = this;
-      return $.ajax({
-        url: 'feeds/github.php',
-        method: 'GET',
-        data: null,
-        success: function(res) {
-          _this.hideLoadState();
-          _this.$el.append(_.template(_this.template, {
-            'success': true,
-            'data': res.trending_repos
-          }));
-          return _this.animateStoriesIn();
-        },
-        error: function(res) {
-          _this.hideLoadState();
-          return _this.$el.append(_.template(_this.template, {
-            'success': false
-          }));
-        }
-      });
+    GithubTrendingReposView.prototype.populateRepos = function(success_state, res) {
+      if (success_state === true) {
+        this.hideLoadState();
+        console.log(res);
+        this.$el.append(_.template(this.template, {
+          'success': true,
+          'data': res.trending_repos
+        }));
+        return this.animateStoriesIn();
+      } else {
+        this.hideLoadState();
+        return this.$el.append(_.template(this.template, {
+          'success': false
+        }));
+      }
+      /*
+      		$.ajax
+      			url : 'feeds/github.php'
+      			method: 'GET'
+      			data: null
+      			success: (res) =>
+      
+      				@hideLoadState()
+      				@$el.append( _.template @template, {'success' : true, 'data' : res.trending_repos} )
+      				@animateStoriesIn()
+      
+      			error: (res) =>
+      
+      				@hideLoadState()
+      				@$el.append( _.template @template, {'success' : false} )
+      */
+
     };
 
     GithubTrendingReposView.prototype.animateStoriesIn = function() {

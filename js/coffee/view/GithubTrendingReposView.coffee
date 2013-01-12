@@ -12,12 +12,19 @@ class GithubTrendingReposView extends AppView
 		@$el.fadeIn(750)
 
 		@template = $('#github-trending-template').html()
-
-		#async grab data
-		@populateGithubTrending()
 	
-	populateGithubTrending: ->
+	populateRepos: (success_state, res) ->
 
+		if success_state == true
+			@hideLoadState()
+			console.log res
+			@$el.append( _.template @template, {'success' : true, 'data' : res.trending_repos} )
+			@animateStoriesIn()
+		else
+			@hideLoadState()
+			@$el.append( _.template @template, {'success' : false} )
+
+		###
 		$.ajax
 			url : 'feeds/github.php'
 			method: 'GET'
@@ -32,6 +39,7 @@ class GithubTrendingReposView extends AppView
 
 				@hideLoadState()
 				@$el.append( _.template @template, {'success' : false} )
+		###
 
 
 	animateStoriesIn: ->

@@ -1,24 +1,42 @@
 class ContentView extends AppView
 
-    el: $('.main')
+	el: $('.main')
 
-    initialize: ->
+	initialize: ->
 
-    	@header = @$el.find('.main-header')[0]
-    	@render()
+		@header = @$el.find('.main-header')[0]
+		@render()
 
-    	@hackerNewsTopStories = new HackerNewsTopStoriesView()
-    	@githubTrendingRepos = new GithubTrendingReposView()
-    	@githubFeaturedRepos = new GithubFeaturedReposView()
-    	
+		@hackerNewsTopStories = new HackerNewsTopStoriesView()
+		@githubTrendingRepos = new GithubTrendingReposView()
+		@githubFeaturedRepos = new GithubFeaturedReposView()
+		
 
-    	@$el.append @hackerNewsTopStories.$el
-    	@$el.append @githubTrendingRepos.$el
-    	@$el.append @githubFeaturedRepos.$el
+		@$el.append @hackerNewsTopStories.$el
+		@$el.append @githubTrendingRepos.$el
+		@$el.append @githubFeaturedRepos.$el
 
-    render: ->
+		@getGithubData()
 
-    	@$el.fadeIn()
-    	h1 = $(@header).find('h1')[0]
-    	$(h1).animate( {'margin-top' : '0'} )
-    		
+	render: ->
+
+		@$el.fadeIn()
+		h1 = $(@header).find('h1')[0]
+		$(h1).animate( {'margin-top' : '0'} )
+
+
+	getGithubData: =>
+
+		@test = $.ajax
+			url : 'feeds/github.php'
+			method: 'GET'
+			data: null
+			success: (res) =>
+
+				@githubTrendingRepos.populateRepos true, res
+				@githubFeaturedRepos.populateRepos true, res
+
+			error: (res) =>
+
+				@githubTrendingRepos.populateRepos false, res
+				@githubFeaturedRepos.populateRepos false, res

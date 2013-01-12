@@ -51,6 +51,8 @@ foreach ($featured_repositories as $value) {
 foreach ($featured_repositories as $value) {
 
 	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(1)->nodeValue));
+	
+	$trending_repos[$repo]['title'] = $repo;
 
 	$featured_repos[$repo]['author'] = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(0)->nodeValue));
 
