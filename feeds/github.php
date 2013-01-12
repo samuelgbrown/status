@@ -78,24 +78,35 @@ foreach ($featured_repositories as $value) {
 
 	$featured_repos[$repo]['forks'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//li[@class="forks"]/a', $value)->item(0)->nodeValue));
 }
-$languages = array();
+$languages_raw = array();
 
 foreach ($featured_repos as $key => $value) {
 
-	$languages[] = json_decode(getAuthUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
+	$languages_raw[] = json_decode(getAuthUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
 }
 foreach ($trending_repos as $key => $value) {
 
-	$languages[] = json_decode(getAuthUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
+	$languages_raw[] = json_decode(getAuthUrl('https://api.github.com/repos/'.$value['author'].'/'.$value['title'].'/languages'));
 }
 
-//print_r($languages);
+foreach ($languages_raw as $value) {
+	$languages[] = get_object_vars($value);
+}
+$total = 0;
 
-foreach ($languages as $value) {
-	//print_r($value);
+foreach ($languages as $key => $value) {
+	foreach ($value as $name => $numbers) {
+		$languages_data[$name] = $languages_data[$name] + $numbers;
+		$total = $total + $numbers;
+	}
+}
+
+foreach ($languages_data as $key => $value) {
+	$languages_output[$key] = (($value / $total) * 100);
 }
 
 $output['featured_repos']=$featured_repos;
 $output['trending_repos']=$trending_repos;
+$output['languages_data']=$languages_output;
 
 print_r(json_encode($output));
