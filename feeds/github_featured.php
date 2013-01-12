@@ -1,6 +1,6 @@
 <?php
- error_reporting(E_WARNINGS);
- ini_set("display_errors", 1);
+ error_reporting(E_WARNING);
+ ini_set("display_errors", 0);
 
 header('Content-type: application/json');
 
@@ -24,11 +24,14 @@ $doc->loadHTML(getUrl('https://github.com/explore'));
 
 $xpath = new DOMXpath($doc);
 
-$trending_repositories = $xpath->query('//ol/li');//ol[@class="ranked-repositories"]');
+$trending_repositories = $xpath->query('//ol/li');
 
-$ranked_repositories = $xpath->query('//ul[@class="ranked-repositories"]');
+$featured_repositories = $xpath->query('//ul[@class="ranked-repositories"]/li');
 
-foreach ($trending_repositories as $value) {
+$trending_repos = array();
+$featured_repos = array();
+
+foreach ($featured_repositories as $value) {
 
 	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(1)->nodeValue));
 
@@ -42,10 +45,20 @@ foreach ($trending_repositories as $value) {
 
 }
 
-foreach ($ranked_repositories as $value) {
-	//print($value->nodeValue);
+foreach ($featured_repositories as $value) {
+
+	$repo = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(1)->nodeValue));
+
+	$featured_repos[$repo]['author'] = trim(preg_replace( '/\s+/', ' ',$xpath->query('.//h3/a', $value)->item(0)->nodeValue));
+
+	$featured_repos[$repo]['description '] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//p[@class="description"]', $value)->item(0)->nodeValue));
+
+	$featured_repos[$repo]['watchers'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//li[@class="watchers"]/a', $value)->item(0)->nodeValue));
+
+	$featured_repos[$repo]['forks'] = trim(preg_replace( '/\s+/', ' ', $xpath->query('.//li[@class="forks"]/a', $value)->item(0)->nodeValue));
 }
 
+$output['featured_repos']=$featured_repos;
 $output['trending_repos']=$trending_repos;
 
 print_r(json_encode($output));
