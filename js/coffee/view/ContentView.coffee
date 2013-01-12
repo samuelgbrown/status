@@ -6,6 +6,7 @@ class ContentView extends AppView
 
     	console.log "content view init"
 
+    	@header = @$el.find('.main-header')[0]
     	@render()
 
     	@githubRepos = new GithubFeaturedReposView()
@@ -17,3 +18,6 @@ class ContentView extends AppView
     render: ->
 
     	@$el.fadeIn()
+    	h1 = $(@header).find('h1')[0]
+    	$(h1).animate( {'margin-top' : '0'} )
+    		

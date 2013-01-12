@@ -71,6 +71,11 @@ h1 {
     font-weight: 300;
 }
 
+.main-header {
+    height: 90px;
+    overflow: hidden;
+}
+
 .main-header h1 {
     font-size: 65px;
 }

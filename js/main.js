@@ -33,6 +33,7 @@
 
     ContentView.prototype.initialize = function() {
       console.log("content view init");
+      this.header = this.$el.find('.main-header')[0];
       this.render();
       this.githubRepos = new GithubFeaturedReposView();
       this.hackerNewsTopStories = new HackerNewsTopStoriesView();
@@ -41,7 +42,12 @@
     };
 
     ContentView.prototype.render = function() {
-      return this.$el.fadeIn();
+      var h1;
+      this.$el.fadeIn();
+      h1 = $(this.header).find('h1')[0];
+      return $(h1).animate({
+        'margin-top': '0'
+      });
     };
 
     return ContentView;
