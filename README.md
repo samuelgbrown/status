@@ -3,7 +3,7 @@
 A web app hackathon project. Gets some rich data about the web community from ycombinator, reddit and github — all presented as follows.
 Hosted [here](http://) by ben.
 
-![Status](/screenshot.png)
+![Status](https://raw.github.com/samuelgbrown/status/master/screenshot.png)
 
 ## Credits
 * [Sam Brown](http://github.com/samuelgbrown) on the front end ([@samuelgbrown](http://twitter.com/samuelgbrown))
