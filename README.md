@@ -1,7 +1,7 @@
 # Status
 
 A web app hackathon project. Gets some rich data about the web community from ycombinator, reddit and github — all presented as follows.
-Hosted [here](http://) by ben.
+Hosted [here](http://websoc.co.uk/status/) by ben.
 
 ![Status](https://raw.github.com/samuelgbrown/status/master/screenshot.png)
 
