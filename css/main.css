@@ -179,13 +179,13 @@ h1 {
 
 .icon { width: 16px; height: 16px; display: inline-block; margin-bottom: -2px;}
 .icon.github {
-    background: url('/img/github.png') top left no-repeat;
+    background: url('../img/github.png') top left no-repeat;
 }
 .icon.hackernews {
-    background: url('/img/hackernews.png') top left no-repeat;
+    background: url('../img/hackernews.png') top left no-repeat;
 }
 .icon.reddit {
-    background: url('/img/reddit.png') top left no-repeat;
+    background: url('../img/reddit.png') top left no-repeat;
 }
 
 
@@ -219,19 +219,19 @@ h1 {
     height: 6px;
     margin: 1px 3px;
     background: rgba(0,0,0,0.3);
-  
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-  
+
     opacity: 0;
-  
+
     -webkit-box-shadow: 0 0 2px black;
     -moz-box-shadow: 0 0 2px black;
     -ms-box-shadow: 0 0 2px black;
     -o-box-shadow: 0 0 2px black;
     box-shadow: 0 0 2px black;
-  
+
     -webkit-animation: loadingFade 1s infinite;
     -moz-animation: loadingFade 1s infinite;
     animation: loadingFade 1s infinite;
