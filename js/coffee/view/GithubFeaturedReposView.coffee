@@ -15,8 +15,6 @@ class GithubFeaturedReposView extends AppView
 	
 	populateRepos: (success_state, res) ->
 
-		console.log success_state, res
-
 		if success_state == true
 			@hideLoadState()
 			@$el.append( _.template @template, {'success' : true, 'data' : res.featured_repos} )

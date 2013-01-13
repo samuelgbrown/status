@@ -10,11 +10,11 @@ class ContentView extends AppView
 		@hackerNewsTopStories = new HackerNewsTopStoriesView()
 		@githubTrendingRepos = new GithubTrendingReposView()
 		@githubFeaturedRepos = new GithubFeaturedReposView()
-		
+		@charts = new ChartsView()
 
-		@$el.append @hackerNewsTopStories.$el
-		@$el.append @githubTrendingRepos.$el
-		@$el.append @githubFeaturedRepos.$el
+		#@$el.append @hackerNewsTopStories.$el
+		#@$el.append @githubTrendingRepos.$el
+		#@$el.append @githubFeaturedRepos.$el
 
 		@getGithubData()
 
@@ -35,6 +35,7 @@ class ContentView extends AppView
 
 				@githubTrendingRepos.populateRepos true, res
 				@githubFeaturedRepos.populateRepos true, res
+				@charts.populateCharts(res.languages_data)
 
 			error: (res) =>
 

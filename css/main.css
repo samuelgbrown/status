@@ -71,6 +71,30 @@ h1 {
     font-weight: 300;
 }
 
+#charts {
+    float: left;
+    padding: 15px;
+}
+
+#charts h1 {
+    margin-top: 0;
+}
+
+#charts svg {
+    float: left;
+}
+
+#charts ul {
+    width: 500px;
+    overflow: hidden;
+    float: left;
+}
+
+#charts ul li {
+    float: left;
+    width: 50%;
+}
+
 .main-header {
     height: 90px;
     overflow: hidden;
@@ -88,6 +112,15 @@ h1 {
     float: left;
     width: 45%;
     box-sizing: border-box;
+}
+
+.stars, .forks {
+    font-weight: 600;
+}
+
+.headline {
+    font-weight: 300;
+    font-size: 22px;
 }
 
 #github-featured,

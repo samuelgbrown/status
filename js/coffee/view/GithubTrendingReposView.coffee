@@ -17,29 +17,11 @@ class GithubTrendingReposView extends AppView
 
 		if success_state == true
 			@hideLoadState()
-			console.log res
 			@$el.append( _.template @template, {'success' : true, 'data' : res.trending_repos} )
 			@animateStoriesIn()
 		else
 			@hideLoadState()
 			@$el.append( _.template @template, {'success' : false} )
-
-		###
-		$.ajax
-			url : 'feeds/github.php'
-			method: 'GET'
-			data: null
-			success: (res) =>
-
-				@hideLoadState()
-				@$el.append( _.template @template, {'success' : true, 'data' : res.trending_repos} )
-				@animateStoriesIn()
-
-			error: (res) =>
-
-				@hideLoadState()
-				@$el.append( _.template @template, {'success' : false} )
-		###
 
 
 	animateStoriesIn: ->
