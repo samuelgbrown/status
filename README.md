@@ -1,7 +1,7 @@
 # Status
 
 A web app hackathon project. Gets some rich data about the web community from ycombinator, reddit and github — all presented as follows.
-Hosted [here](http://websoc.co.uk/status/) by ben.
+Hosted [here](http://websoc.co.uk/status/) by Ben.
 
 ![Status](https://raw.github.com/samuelgbrown/status/master/screenshot.png)
 
@@ -27,7 +27,7 @@ Hosted [here](http://websoc.co.uk/status/) by ben.
 ### APIs
 * [iHackerNews' 3rd party API](http://api.ihackernews.com)
 * [Reddit API](https://github.com/reddit/reddit/wiki/API)
-* [GitHub API v3](http://developer.github.com/v3/) (NOTE: Ben used some dummy details for GitHub auth to get round some pretty harsh rate limits.)
+* [GitHub API v3](http://developer.github.com/v3/) (NOTE: Ben used some dummy (bugmenot) details for GitHub auth to get round some pretty harsh rate limits.)
 
 ### Other
 * [Sublime Text 2](http://www.sublimetext.com/) is our choice of IDE.
