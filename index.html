@@ -90,7 +90,7 @@
                     <li>
                         <p style="opacity:0">
                             <span class="headline">
-                                <a href="http://github.com/<%= repo.author %>/<%= repo.title %>"><%= repo.title %></a> from 
+                                <a href="http://github.com/<%= repo.author %>/<%= repo.title %>"><%= repo.title %></a> from
                                 <a href="http://github.com/<%= repo.author %>"><%= repo.author %></a>
                             </span>
                             <p><%= repo.description %></p>
@@ -116,7 +116,7 @@
                     <li>
                         <p style="opacity:0">
                             <span class="headline">
-                                <a href="http://github.com/<%= repo.author %>/<%= repo.title %>"><%= repo.title %></a> from 
+                                <a href="http://github.com/<%= repo.author %>/<%= repo.title %>"><%= repo.title %></a> from
                                 <a href="http://github.com/<%= repo.author %>"><%= repo.author %></a>
                             </span>
                             <p><%= repo.description %></p>
@@ -156,9 +156,12 @@
                                 <% if (story.sources.reddit) { %>
                                     <span class="icon reddit"></span>
                                 <% } %>
+                                <% if (story.sources.bbc_news) { %>
+                                    <span class="icon bbcnews"></span>
+                                <% } %>
 
                                 </p>
-                                
+
                             </li>
 
                             <% } %>

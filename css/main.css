@@ -187,6 +187,9 @@ h1 {
 .icon.reddit {
     background: url('../img/reddit.png') top left no-repeat;
 }
+.icon.bbcnews {
+    background: url('../img/bbc.png') top left no-repeat;
+}
 
 
 .box{
